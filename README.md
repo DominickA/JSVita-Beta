@@ -1,4 +1,4 @@
-JSVita - JavaScript Framework/Library in the Making - Simplicity to the Fullest | Beta 1
+JSVita - JavaScript Framework - Simplicity to the Fullest | Beta 1
 ===============================
 
 This is a beta version of the upcoming JSVita. This framework is very simple, hence the motto: "Simplicity to the Fullest". I strive to teach others about pure JavaScript while having them decide whether they want to write it all out, or use our framework, but understand JavaScript at the same time.
