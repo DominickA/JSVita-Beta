@@ -277,5 +277,4 @@
 	
     //Define how to call JSVita
     if (!window.$) window.$ = window.vita;
-	window.vita = window.vita;
 })(); //END JSVita
