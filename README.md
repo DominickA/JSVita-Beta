@@ -54,20 +54,29 @@ The main global "selector function" of JSVita is "vita" (vita(selector).function
 * __.change(element)__ Changes the specified element(s) to whatever is defined in 'element'.
 * __.cover(opening, closing)__ Wraps whatever element(s) are selected in the tags defined. For example: .cover('<div class="test">','</div>') towards <span>Test</span> will result in <div class="test"><span>Test</span></div>.
 * __.locate(position)__ Gives the offsetLeft and offsetHeight of the specified element. If you leave position blank "()", you will get: (offsetLeft+px, offsetHeight+px). If you specify 'left' in the position, you will be returned the offsetLeft in pixels. If you specify 'height' in the location, you will be returned the offsetHeight of the element in pixels.
+
+
+
 #### Filtering
 * __.has(hasthis, attrvalue)__ Returns true or false as to whether the selected element(s) contain whatever is defined in the parameters. The three selectors are: * for has text, @ for has this attribute and value(must fill in value!), and . for has class. Example:
+
 ```javascript
 <div class="class">Test</div>
 vita('.class').has('.class') //Returns true
 ```
+
 ```javascript
 <div class="class">Test</div>
 vita('.class').has('*Test') //Returns true
 ```
+
 ```javascript
 <div class="class" alt="TEST">Test</div>
 vita('.class').has('@alt','TEST') //Returns true
 ```
+
+
+
 #### Events
 * __.mouseover(function() { })__ Executes the function whenever you hover over the specified element(s).
 * __.mouseout(function() { })__ Executes the function whenever you hover out of the specified element(s).
