@@ -53,7 +53,7 @@
 	
     //Begin Defining Functions
     vitajs.get = function () {
-        return this.elements;
+		return this.elements;
 		return this;
     };
 
@@ -160,11 +160,13 @@
             for (i = 0; i < this.elements.length; i++) {
                 currentStyle = this.elements[i].getAttribute('style');
                 if (currentStyle == null || currentStyle == undefined) currentStyle = '';
+				else if (/^[^;]+$/.test(currentStyle)) currentStyle = currentStyle+';';
                 this.elements[i].setAttribute('style', currentStyle + style);
             }
         } else {
             currentStyle = this.elements.getAttribute('style');
             if (currentStyle == null || currentStyle == undefined) currentStyle = '';
+		    else if (/^[^;]+$/.test(currentStyle)) currentStyle = currentStyle+';';
             this.elements.setAttribute('style', currentStyle + style);
         }
         return this;
@@ -256,25 +258,32 @@
 		else if (position == "height") return this.elements.offsetHeight+'px';
 		return this;
 	};
-	//Select By
-	vitajs.hasClass = function(cname) {
-        if (this.elements.length >= 1) {
+	
+	//Specifications for if this selector exists
+	vitajs.has = function(getby, value) {
+		var searchString = new RegExp(getby.substr(1), "g");
+		if (this.elements.length >= 1) {
             for (i = 0; i < this.elements.length; i++) {
-				if (this.elements[i].getAttribute('class').indexOf(cname) == 0) return this.elements[i];
+			if (/^\*\w+/.test(getby)) {
+				if (searchString.test(this.elements[i].innerHTML)) return true;
+			} else if (/^@\w+/.test(getby)) {
+				if (this.elements[i].getAttribute(getby.substr(1)).indexOf(value) == 0) return true;
+			} else if (/^\.\w+/.test(getby)) {
+				if (searchString.test(this.elements[i].getAttribute('class'))) return true;
 			}
-        }
+			}
+        } else {
+			if (/^\*\w+/.test(getby)) {
+				if (searchString.test(this.elements.innerHTML)) return true;
+			} else if (/^\@\w+/.test(getby)) {
+				if (this.elements.getAttribute(getby.substr(1)).indexOf(value) == 0) return true;
+			} else if (/^\.\w+/.test(getby)) {
+				if (searchString.test(this.elements.getAttribute('class'))) return true;
+			}
+		}
+		return false;
         return this;
 	};
-	
-	vitajs.hasText = function(text) {
-        if (this.elements.length >= 1) {
-            for (i = 0; i < this.elements.length; i++) {
-				if (this.elements[i].innerHTML.indexOf(text) == 0) return this.elements[i];
-			}
-        }
-        return this;
-	};
-	
     //Define how to call JSVita
     if (!window.$) window.$ = window.vita;
 })(); //END JSVita
