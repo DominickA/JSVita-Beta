@@ -44,7 +44,7 @@ The main global "selector function" of JSVita is "vita" (vita(selector).function
 * __.show()__ Makes an element visible.
 * __.hide()__ Makes an element invisible.
 * __.prop(attribute, value)__ Returns the specified attribute value of an element if you only put the attribute: .prop('alt') returns the value of alt. This also sets the specified attribute's value if you define the next paramater: .prop('alt','Some Text'). This also removes the attribute completely if you put an exclamation before the specified attribute: .prop('!alt') removes the "alt" attribute.
-* __.addClass(class)__ Adds the specified class to an element.
+* __.className(class)__ If class is not defined, it will return the class name. If there is a '+' in the class, it will add the class name to the existing class, example: .className('+class'). If no '+' is defined, the current class will be replaced with the new class.
 * __.style(style)__ Adds whatever is defined in the style parameter to the style attribute of the specified element(s). For example: <div id="test" style="color: red;"></div>, vita('#test').style('background-color: white; font-size: 14px;') makes the div's style change to: <div id="test" style="color: red;background-color: white; font-size: 14px;"></div>. There must be a semicolon existing in the last style attribute of the exisisting element (color: red;).
 * __.after(element)__ Adds whatever is defined in 'element' after the specified element(s).
 * __.before(element)__ Adds whatever is defined in 'element' before the specified element(s).
@@ -54,10 +54,13 @@ The main global "selector function" of JSVita is "vita" (vita(selector).function
 * __.change(element)__ Changes the specified element(s) to whatever is defined in 'element'.
 * __.cover(opening, closing)__ Wraps whatever element(s) are selected in the tags defined. For example: .cover('<div class="test">','</div>') towards <span>Test</span> will result in <div class="test"><span>Test</span></div>.
 * __.locate(position)__ Gives the offsetLeft and offsetHeight of the specified element. If you leave position blank "()", you will get: (offsetLeft+px, offsetHeight+px). If you specify 'left' in the position, you will be returned the offsetLeft in pixels. If you specify 'height' in the location, you will be returned the offsetHeight of the element in pixels.
+* __.parent()__ Allows editing of the parent of the selector. This can be chained: vita('#test').parent().parent().parent() .
+* __.next()__ Allows editing of the nextSibling of the selector. This can be chained: vita('#test').next().next().next().get(). This must be used with .get() and straight JavaScript (not a chained function withing JSVita).
+* __.prev()__ Allows editing of the previousSibling of the selector. This can be chained: vita('#test').prev().prev().prev().get(). This must be used with .get() and straight JavaScript (not a chained function withing JSVita).
+* __.children()__ Returns the childNodes of the selector. Could be used with .get().
 
 
-
-#### Filtering
+#### Determination (Determines True/False. Useful for if statements.) / Filters
 * __.has(hasthis, attrvalue)__ Returns true or false as to whether the selected element(s) contain whatever is defined in the parameters. The three selectors are: * for has text, @ for has this attribute and value(must fill in value!), and . for has class. Example:
 
 ```javascript
@@ -75,15 +78,33 @@ vita('.class').has('*Test') //Returns true
 vita('.class').has('@alt','TEST') //Returns true
 ```
 
+* __.first()__ Selects the first occurence of the selector and can be used with other functions. Example: vita('div').first().html().
+* __.last()__ Selects the last occurence of the selector and can be used with other functions. Example: vita('div').last().html().
 
 
 #### Events
-* __.mouseover(function() { })__ Executes the function whenever you hover over the specified element(s).
-* __.mouseout(function() { })__ Executes the function whenever you hover out of the specified element(s).
+* __.hover(function() { })__ Executes the function whenever you hover over the specified element(s).
+* __.hoverOut(function() { })__ Executes the function whenever you hover out of the specified element(s).
 * __.click(function() { })__ Executes the function whenever you click the specified element(s).
 * __.focus(function() { })__ Executes the function whenever you focus on the specified element(s).
 
 
+#### Ajax
+* __.load(url, success)__ Loads the URL's entire page into the selector. If success is a function, it will execute the function once loaded. So with a function it would look like: vita('#test').load('/test.html', function() { alert('Loaded!'); }).
 
 
+#### The DOM Ready Function
+This function waits for the document to finish loading, then executes the script within the function. This is not the same as window.onload() which waits for the window to be ready, this waits for the document to be ready and fires as soon as it is. This is faster than window.onload().
+Full Code:
+```javascript
+vita.onload(function() {
+alert('Document Loaded'); //Alerts when the DOM has loaded
+});
+```
 
+Short Code (Does exactly the same as the full code. Same speed and everything):
+```javascript
+vita(function() {
+alert('Document Loaded'); //Alerts when the DOM has loaded
+});
+```
