@@ -165,7 +165,7 @@ var doc=document,isIE=/(?!.*?opera.*?)msie(?!.*?opera.*?)/i.test(navigator.userA
 	                }
 	            }
 	            return strValue;
-	        } else if (check(style == "object") && value == undefined) {
+	        } else if (check(style) == "object" && value == undefined) {
 	            for (var property in style) {
 	                if (this.elements[i].style.setProperty) this.elements[i].style.setProperty([property], style[property]);
 	                else this.elements[i].style[this.remDash(property)] = style[property];
