@@ -67,7 +67,7 @@ var doc=document,isIE=/(?!.*?opera.*?)msie(?!.*?opera.*?)/i.test(navigator.userA
 	        if (this.elements[i].addEventListener) {
 	            return this.elements[i].addEventListener(eName, func, false);
 	        } else if (this.elements[i].attachEvent) {
-	            return this.elements[i].attachEvent(eName, func);
+	            return this.elements[i].attachEvent('on'+eName, func);
 	        } else {
 	            return this.elements[i]['on'+eName] = func();
 	        }
