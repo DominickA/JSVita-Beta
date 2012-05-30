@@ -61,12 +61,14 @@ For an even shorter yet global "selector function", you can use $jsv: $jsv(selec
 * __.prop(attribute, value)__ Returns the specified attribute value of an element if you only put the attribute: .prop('alt') returns the value of alt. This also sets the specified attribute's value if you define the next paramater: .prop('alt','Some Text'). This also removes the attribute completely if you put an exclamation before the specified attribute: .prop('!alt') removes the "alt" attribute.
 * __.className(class)__ If class is not defined, it will return the class name. If there is a '+' in the class, it will add the class name to the existing class, example: .className('+class'). If no '+' is defined, the current class will be replaced with the new class.
 * __.css(style, value)__ If value is undefined, it will return the literal style of the element (even if it's in a CSS style sheet). If you wish to set the style of an element(s), simply add a value: vita('selector').css('color','blue'). OR if you wish to set multiple style attributes use the following format: 
+
 ```javascript
 vita('selector').css({
 'color':'blue',
 'font-size':'12px'
 });
 ```
+
 * __.after(element)__ Adds whatever is defined in 'element' after the specified element(s).
 * __.before(element)__ Adds whatever is defined in 'element' before the specified element(s).
 * __.append(element)__ Appends whatever is defined in 'element' to a the specified element(s) as the last child.
@@ -76,8 +78,8 @@ vita('selector').css({
 * __.cover(opening, closing)__ Wraps whatever element(s) are selected in the tags defined. For example: .cover('<div class="test">','</div>') towards <span>Test</span> will result in <div class="test"><span>Test</span></div>.
 * __.locate(position)__ Gives the offsetLeft and offsetHeight of the specified element. If you leave position blank "()", you will get: (offsetLeft+px, offsetHeight+px). If you specify 'left' in the position, you will be returned the offsetLeft in pixels. If you specify 'height' in the location, you will be returned the offsetHeight of the element in pixels.
 * __.parent()__ Allows editing of the parent of the selector. This can be chained: vita('#test').parent().parent().parent() .
-* __.next()__ Allows editing of the nextSibling of the selector. This can be chained: vita('#test').next().next().next().get(). This must be used with .get() and straight JavaScript (not a chained function withing JSVita).
-* __.prev()__ Allows editing of the previousSibling of the selector. This can be chained: vita('#test').prev().prev().prev().get(). This must be used with .get() and straight JavaScript (not a chained function withing JSVita).
+* __.next()__ Allows editing of the nextSibling of the selector. This can be chained: vita('#test').next().next().next().
+* __.prev()__ Allows editing of the previousSibling of the selector. This can be chained: vita('#test').prev().prev().prev().
 * __.children()__ Returns the childNodes of the selector. Could be used with .get().
 * __.clone()__ Clones the Element.
 * __.find(selector)__ Works exactly like: vita('div p'). Finds whatever you define as the selector within the main selector. Example: vita('div').find('a') returns all of the a tags within a div tag.
