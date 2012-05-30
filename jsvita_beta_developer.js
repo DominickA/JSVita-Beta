@@ -62,14 +62,14 @@ var doc=document,isIE=/(?!.*?opera.*?)msie(?!.*?opera.*?)/i.test(navigator.userA
 	    }
 	};
 
-	vitajs.addEvent = function (eName, func, backup) {
+	vitajs.addEvent = function (eName, func) {
 	    for (i = 0; i < this.elements.length; i++) {
 	        if (this.elements[i].addEventListener) {
 	            return this.elements[i].addEventListener(eName, func, false);
 	        } else if (this.elements[i].attachEvent) {
 	            return this.elements[i].attachEvent(eName, func);
 	        } else {
-	            return this.elements[i][backup] = func();
+	            return this.elements[i]['on'+eName] = func();
 	        }
 	    }
 	};
@@ -252,22 +252,22 @@ var doc=document,isIE=/(?!.*?opera.*?)msie(?!.*?opera.*?)/i.test(navigator.userA
 	};
 
 	vitajs.hover = function (script) {
-	    this.addEvent('mouseover', script, 'onmouseover');
+	    this.addEvent('mouseover', script);
 	    return this;
 	};
 
 	vitajs.hoverOut = function (script) {
-	    this.addEvent('mouseout', script, 'onmouseout');
+	    this.addEvent('mouseout', script);
 	    return this;
 	};
 
 	vitajs.click = function (script) {
-	    this.addEvent('click', script, 'onclick');
+	    this.addEvent('click', script);
 	    return this;
 	};
 
 	vitajs.focus = function (script) {
-	    this.addEvent('focus', script, 'onfocus');
+	    this.addEvent('focus', script);
 	    return this;
 	};
 
