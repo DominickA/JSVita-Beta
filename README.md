@@ -1,12 +1,13 @@
-JSVita - JavaScript Framework - Simplicity to the Fullest | Beta 3
+JSVita - JavaScript Framework - Simplicity to the Fullest | Beta 4
 ===============================
 
 This is a beta version of the upcoming JSVita. This framework is very simple, hence the motto: "Simplicity to the Fullest". I strive to teach others about pure JavaScript while having them decide whether they want to write it all out, or use our framework, but understand JavaScript at the same time.
 
-This Framework/Library will only currently work with the more modern browsers (Firefox, Google Chrome, Safari, Internet Explorer 6+). I believe that in order for someone to get the full experience of developing, they should experience it in the most modern conditions.
+This Framework/Library will work in most browsers, some old and all new.
 
-Currently, this beta version only selects single selectors (not chainable, or multiple).
+This Framework uses the CSS Selector Engine named Peppy. So, to select something, you simply select it exactly as you would in a CSS StyleSheet!
 
+Examples:
 Selecting IDs (use the # symbol):
 ```javascript
 vita('#ID').prepend('<div>TEST</div>') //Creates a new first child of the ID: ID
@@ -22,18 +23,32 @@ Selecting Tags (no symbol):
 vita('body').prepend('<div>TEST</div>') //Creates a new first child of the tag: body
 ```
 
-Selecting Names (use the @ symbol):
-```javascript
-vita('@name').prepend('<div>TEST</div>') //Creates a new first child of elements with the name: name
-```
-
 Selecting Classes, Tags, and Names Through Node Specification
 ```javascript
-vita('.name', 0).prepend('<div>TEST</div>') //Creates a new first child of the first element that contains the class name: class
+vita('.name:nth(0)').prepend('<div>TEST</div>') //Creates a new first child of the first element that contains the class name: class
 ```
+
+Selecting Chained Elements
+```javascript
+vita('div.class p').prepend('<div>TEST</div>') //selects all div elements with class of "class" and then selects all p elements inside of it
+```
+
+Selecting By Attribute
+```javascript
+vita('div[alt="test"]').prepend('<div>TEST</div>') //selects all div elements with the alt attribute equaling "test"
+```
+
+Selecting By JavaScript
+```javascript
+vita(document.getElementById('ID')).prepend('<div>TEST</div>') //selects the id "ID"
+```
+
+To make it simple and short, just use any CSS Selector you know inside the vita(). For a list of them you can visit: http://www.w3.org/TR/CSS2/selector.html
 -------------
 #### Using JSVita Beta.  
-The main global "selector function" of JSVita is "vita" (vita(selector).function()). However, if no library that uses the "$" as a selector function, then you may also use the $, much like jQuery ($(selector).function()).
+The main global "selector function" of JSVita is "vita": vita(selector).function(). However, if no library that uses the "$" as a selector function, then you may also use the $, much like jQuery ($(selector).function()). 
+
+For an even shorter yet global "selector function", you can use $jsv: $jsv(selector).function().
 
 #### Functions
 * __.get()__ Returns the element selected for use with pure JavaScript.
@@ -45,7 +60,13 @@ The main global "selector function" of JSVita is "vita" (vita(selector).function
 * __.hide()__ Makes an element invisible.
 * __.prop(attribute, value)__ Returns the specified attribute value of an element if you only put the attribute: .prop('alt') returns the value of alt. This also sets the specified attribute's value if you define the next paramater: .prop('alt','Some Text'). This also removes the attribute completely if you put an exclamation before the specified attribute: .prop('!alt') removes the "alt" attribute.
 * __.className(class)__ If class is not defined, it will return the class name. If there is a '+' in the class, it will add the class name to the existing class, example: .className('+class'). If no '+' is defined, the current class will be replaced with the new class.
-* __.style(style)__ Adds whatever is defined in the style parameter to the style attribute of the specified element(s). For example: <div id="test" style="color: red;"></div>, vita('#test').style('background-color: white; font-size: 14px;') makes the div's style change to: <div id="test" style="color: red;background-color: white; font-size: 14px;"></div>. There must be a semicolon existing in the last style attribute of the exisisting element (color: red;).
+* __.css(style, value)__ If value is undefined, it will return the literal style of the element (even if it's in a CSS style sheet). If you wish to set the style of an element(s), simply add a value: vita('selector').css('color','blue'). OR if you wish to set multiple style attributes use the following format: 
+```javascript
+vita('selector').css({
+'color':'blue',
+'font-size':'12px'
+});
+```
 * __.after(element)__ Adds whatever is defined in 'element' after the specified element(s).
 * __.before(element)__ Adds whatever is defined in 'element' before the specified element(s).
 * __.append(element)__ Appends whatever is defined in 'element' to a the specified element(s) as the last child.
@@ -58,6 +79,8 @@ The main global "selector function" of JSVita is "vita" (vita(selector).function
 * __.next()__ Allows editing of the nextSibling of the selector. This can be chained: vita('#test').next().next().next().get(). This must be used with .get() and straight JavaScript (not a chained function withing JSVita).
 * __.prev()__ Allows editing of the previousSibling of the selector. This can be chained: vita('#test').prev().prev().prev().get(). This must be used with .get() and straight JavaScript (not a chained function withing JSVita).
 * __.children()__ Returns the childNodes of the selector. Could be used with .get().
+* __.clone()__ Clones the Element.
+* __.find(selector)__ Works exactly like: vita('div p'). Finds whatever you define as the selector within the main selector. Example: vita('div').find('a') returns all of the a tags within a div tag.
 
 
 #### Determination (Determines True/False. Useful for if statements.) / Filters
@@ -87,10 +110,6 @@ vita('.class').has('@alt','TEST') //Returns true
 * __.hoverOut(function() { })__ Executes the function whenever you hover out of the specified element(s).
 * __.click(function() { })__ Executes the function whenever you click the specified element(s).
 * __.focus(function() { })__ Executes the function whenever you focus on the specified element(s).
-
-
-#### Ajax
-* __.load(url, success)__ Loads the URL's entire page into the selector. If success is a function, it will execute the function once loaded. So with a function it would look like: vita('#test').load('/test.html', function() { alert('Loaded!'); }).
 
 
 #### The DOM Ready Function
