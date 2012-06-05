@@ -1,7 +1,7 @@
 JSVita - JavaScript Framework - Simplicity to the Fullest | Beta 4
 ===============================
 
-This is a beta version of the upcoming JSVita. This framework is very simple, hence the motto: "Simplicity to the Fullest". I strive to teach others about pure JavaScript while having them decide whether they want to write it all out, or use our framework, but understand JavaScript at the same time.
+This is the beta version of the upcoming JSVita JavaScript Framework. This framework is very simple, hence the motto: "Simplicity to the Fullest". I strive to teach others about pure JavaScript while having them decide whether they want to write it all out, or use my framework, but understand JavaScript at the same time.
 
 This Framework/Library will work in most browsers, some old and all new.
 
@@ -44,6 +44,7 @@ vita(document.getElementById('ID')).prepend('<div>TEST</div>') //selects the id 
 ```
 
 To make it simple and short, just use any CSS Selector you know inside the vita(). For a list of them you can visit: http://www.w3.org/TR/CSS2/selector.html
+
 -------------
 #### Using JSVita Beta.  
 The main global "selector function" of JSVita is "vita": vita(selector).function(). However, if no library that uses the "$" as a selector function, then you may also use the $, much like jQuery ($(selector).function()). 
@@ -112,6 +113,22 @@ vita('.class').has('@alt','TEST') //Returns true
 * __.hoverOut(function() { })__ Executes the function whenever you hover out of the specified element(s).
 * __.click(function() { })__ Executes the function whenever you click the specified element(s).
 * __.focus(function() { })__ Executes the function whenever you focus on the specified element(s).
+* __.dblclick(function() { })__ Executes the function whenever you double click on the specified element(s).
+* __.submit(function() { })__ Executes the function whenever you submit the specified form(s).
+
+
+#### Animations
+* __.animate(type, to, step, delay)__ 
+type — type of animation effect. The type paramter is same as the CSS property name for a DOM element. So, to alter the X-Coordinate of an element, the type needs to be set to 'left'. Other properties you can alter are:
+    opacity — cross-browser property to adjust an element's opacity.
+    backgroundx — background X position.
+    backgroundy — background Y position. 
+to — end property value. Once it has been reached, the effect stops running.
+step — positive or negative integer value to alter a CSS property, per one iteration (i.e. step).
+delay — delay between iterations in miliseconds. This parameter is optional, by default it is 100. Do not set this number too high, unless you want choppy animation. 
+* __.fadeOut(duration)__ Fades out the element(s). The duration can be a number, "slow", "fast", or blank. Blank is a normal speed.
+* __.fadeIn(duration)__ Fades in the element(s). The duration can be a number, "slow", "fast", or blank. Blank is a normal speed.
+* __.fadeToggle(duration)__ Fade toggles the element(s). If the element is not visible, it will be and vice versa. The duration can be a number, "slow", "fast", or blank. Blank is a normal speed.
 
 
 #### The DOM Ready Function
